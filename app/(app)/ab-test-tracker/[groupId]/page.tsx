@@ -5,7 +5,9 @@ import { useEmaStore } from '@/lib/store';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip as RTooltip, XAxis, YAxis, LineChart, Line, Legend } from 'recharts';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+
+type SimpleFunnel = { id: string; name: string };
 
 export default function AbGroupDetailPage() {
   const [editOpen, setEditOpen] = useState(false);
@@ -16,10 +18,11 @@ export default function AbGroupDetailPage() {
   const group = useEmaStore((s) => s.abTestGroups.find((g) => g.id === groupId));
 const deleteGroup = useEmaStore(s=>s.deleteAbTestGroup);
   const variants = useEmaStore((s) => s.getVariantsForGroup(groupId));
-  const funnels = useEmaStore((s) => s.funnels);
+  const funnels = useEmaStore((s) => s.funnels) as SimpleFunnel[];
+  const funnelMap = useMemo(() => Object.fromEntries(funnels.map((f)=>[f.id, f.name])), [funnels]);
 
   if (!group) return <div className="p-6">Group not found</div>;
-  const funnelName = group.funnelId ? (funnels.find((f) => f.id === group.funnelId)?.name ?? '—') : '—';
+  const funnelName = group.funnelId ? (funnelMap[group.funnelId] ?? '—') : '—';
 
   return (
     <div className="space-y-6">
