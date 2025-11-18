@@ -142,6 +142,8 @@ export const useEmaStore = create<EmaState>()(
       setNorthStars: (list) => set(()=> ({ northStarMetrics: list })),
 
     }),
-    { name: 'ema-store' },
+    { name: 'ema-store' ,
+    skipHydration: true 
+    }
   ),
 );
