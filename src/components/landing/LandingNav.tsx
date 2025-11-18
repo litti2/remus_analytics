@@ -30,8 +30,8 @@ export default function LandingNav() {
   }, []);
 
   return (
-    <div className={`sticky top-0 z-40 w-full transition-all ${scrolled ? 'backdrop-blur supports-[backdrop-filter]:bg-[#0b1020]/70' : 'backdrop-blur-[2px] supports-[backdrop-filter]:bg-[#0b1020]/40'} border-b border-white/10` }>
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <div className={`sticky top-0 z-40 w-full transition-all ${scrolled ? 'backdrop-blur supports-[backdrop-filter]:bg-[#0b1020]/75 shadow-[0_6px_24px_rgba(0,0,0,0.35)]' : 'backdrop-blur-[2px] supports-[backdrop-filter]:bg-[#0b1020]/40'} border-b border-white/10` }>
+      <div className={`mx-auto flex max-w-6xl items-center justify-between px-4 ${scrolled ? 'py-2' : 'py-3'} transition-all`}>
         {/* Left: logo */}
         <Link href="#hero" className="group flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-teal-400 shadow-inner">

@@ -396,7 +396,7 @@ export default function FunnelDetailPage() {
                 className="text-sm text-primary underline"
                 href={`/copilot-workspace?funnelId=${funnelId}&insightId=${i.id}`}
               >
-                Ask Ema
+                Ask Remus
               </Link>
             </div>
           ))}

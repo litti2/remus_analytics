@@ -1,3 +1,5 @@
+import Reveal from '../Reveal';
+
 export default function Personas() {
   const cols = [
     { title:'Early-stage startups', bullets:['Just starting to instrument signups and onboarding.','No dedicated analytics engineer.','Want funnels explained in plain language.'] },
@@ -9,13 +11,15 @@ export default function Personas() {
       <div className="mx-auto max-w-6xl px-6 py-16">
         <h2 className="mb-6 text-center text-2xl font-semibold">Who Remus is for</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {cols.map((c) => (
-            <div key={c.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+          {cols.map((c,i) => (
+            <Reveal key={c.title} delay={i*100}>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
               <h3 className="mb-2 font-medium">{c.title}</h3>
               <ul className="list-disc pl-5 text-sm text-white/75">
                 {c.bullets.map(b => <li key={b}>{b}</li>)}
               </ul>
             </div>
+          </Reveal>
           ))}
         </div>
       </div>

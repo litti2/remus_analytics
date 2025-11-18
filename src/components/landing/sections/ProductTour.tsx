@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Reveal from '../Reveal';
 
 export default function ProductTour() {
   const cards = [
@@ -17,12 +18,14 @@ export default function ProductTour() {
         <h2 className="text-center text-2xl font-semibold">Product tour</h2>
         <p className="mt-1 text-center text-sm text-white/70">Every part of Remus supports one loop: Funnels → Insights → Experiments → Learnings.</p>
         <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {cards.map((card) => (
-            <Link key={card.route} href={card.route as any} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-sm text-white/90 backdrop-blur transition hover:-translate-y-0.5 hover:border-teal-400/40">
+          {cards.map((card, i) => (
+            <Reveal key={card.route} delay={i*70}>
+            <Link href={card.route as any} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-sm text-white/90 backdrop-blur transition hover:-translate-y-0.5 hover:border-teal-400/40">
               <div className="font-medium">{card.title}</div>
               <div className="mt-1 text-white/70">{card.desc}</div>
               <div className="mt-3 text-teal-300">Open in app →</div>
             </Link>
+          </Reveal>
           ))}
         </div>
       </div>

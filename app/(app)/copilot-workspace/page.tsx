@@ -91,7 +91,7 @@ function CopilotWorkspacePageInner() {
           <div ref={endRef} />
         </div>
         <div className="mt-3 flex items-center gap-2">
-          <Input value={input} onChange={e=>setInput(e.target.value)} placeholder="Ask Ema..." onKeyDown={e=>{ if (e.key==='Enter') send(); }} />
+          <Input value={input} onChange={e=>setInput(e.target.value)} placeholder="Ask Remus..." onKeyDown={e=>{ if (e.key==='Enter') send(); }} />
           <Button onClick={send}>Send</Button>
         </div>
       </Card>

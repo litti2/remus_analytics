@@ -37,7 +37,7 @@ export const Layout = ({ children }: LayoutProps) => {
           <div className="flex items-center gap-3 px-3">
             <img src="/remus-logo.svg" alt="Remus" className="h-10 w-10 rounded-full" />
             <div className="flex flex-col">
-              <h1 className="text-base font-semibold text-foreground">Ema</h1>
+              <h1 className="text-base font-semibold text-foreground">Remus</h1>
               <p className="text-sm text-muted-foreground">Growth Lab</p>
             </div>
           </div>

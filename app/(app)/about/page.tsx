@@ -35,13 +35,13 @@ export default function RemusPrdPage() {
 
         <section className="space-y-2">
           <h2 className="text-lg font-semibold text-foreground">3. Strategic Rationale</h2>
-          <p><strong>Why This Matters for Ema</strong></p>
+          <p><strong>Why This Matters for Remus</strong></p>
           <ul className="list-disc pl-6 space-y-1">
-            <li>Ema already excels at reasoning and interpreting data</li>
+            <li>Remus already excels at reasoning and interpreting data</li>
             <li>Users repeatedly ask for help understanding funnels, performance changes, and growth opportunities</li>
             <li>Full analytics tools (Mixpanel, Amplitude) are too heavy for early teams</li>
             <li>There is no "lightweight + AI-native" experimentation system in the market</li>
-            <li>Remus aligns with Ema's mission: augment human teams by turning ambiguity into clarity</li>
+            <li>Remus aligns with the mission: augment human teams by turning ambiguity into clarity</li>
           </ul>
         </section>
 
@@ -223,7 +223,7 @@ export default function RemusPrdPage() {
 
         <section className="space-y-2">
           <h2 className="text-lg font-semibold text-foreground">16. Recommendation</h2>
-          <p>Build Remus as a modular, reasoning-first experimentation layer inside Ema.</p>
+          <p>Build Remus as a modular, reasoning-first experimentation layer inside Remus.</p>
           <p>Start simple: custom funnels + analysis + experiment ideation + tracking. Layer in visualization and workflow integration next.</p>
           <p>Remus has the potential to become the daily workspace for early teams making growth decisions and fundamentally accelerates insight &gt; action &gt; learning.</p>
           <p><strong>Next Steps:</strong></p>
