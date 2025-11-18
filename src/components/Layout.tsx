@@ -1,6 +1,7 @@
 'use client';
 import { ReactNode } from "react";
 import Link from "next/link";
+import type { Route } from 'next';
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, MessageSquare, Upload, TrendingUp, Lightbulb, BookOpen, Info, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -11,7 +12,8 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-const navItems = [
+type NavItem = { path: Route; label: string; icon: any };
+const navItems: NavItem[] = [
   { path: "/overview", label: "Overview", icon: LayoutDashboard },
   { path: "/copilot-workspace", label: "Copilot Workspace", icon: MessageSquare },
   { path: "/data-uploads", label: "Data & Uploads", icon: Upload },

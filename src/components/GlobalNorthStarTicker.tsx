@@ -71,20 +71,36 @@ export default function GlobalNorthStarTicker() {
           <div className="mb-2 text-sm font-medium text-muted-foreground">North Star Metrics</div>
           <div className="max-h-64 overflow-auto divide-y divide-border">
             {list.sort((a,b)=>a.order-b.order).map((row)=>{
-              const isFunnel = row.entityType==='funnel';
-              const target = isFunnel ? funnels.find(f=>f.id===row.entityId) : groups.find(g=>g.id===row.entityId);
-              if (!target) return null;
-              const name = isFunnel ? (target.northStarMetric||target.name) : (target.primaryMetric||target.name);
-              const href = isFunnel ? `/funnel-explorer/${target.id}` : `/ab-test-tracker/${target.id}`;
-              return (
-                <Link key={`${row.entityType}-${row.entityId}-${row.id}`} href={href} className="flex items-center justify-between px-2 py-2 hover:bg-secondary/40">
-                  <div className="min-w-0">
-                    <div className="truncate text-sm font-medium">{name}</div>
-                    <div className="text-xs text-muted-foreground">{row.entityType} • {row.entityId}</div>
-                  </div>
-                  <div className="text-xs text-teal-400">▲ trend</div>
-                </Link>
-              );
+              const isFunnel = row.entityType === 'funnel';
+              if (isFunnel) {
+                const f = funnels.find(f => f.id === row.entityId);
+                if (!f) return null;
+                const name = f.northStarMetric || f.name;
+                const href = { pathname: '/funnel-explorer/[funnelId]', query: { funnelId: f.id } } as const;
+                return (
+                  <Link key={`${row.entityType}-${row.entityId}-${row.id}`} href={href} className="flex items-center justify-between px-2 py-2 hover:bg-secondary/40">
+                    <div className="min-w-0">
+                      <div className="truncate text-sm font-medium">{name}</div>
+                      <div className="text-xs text-muted-foreground">{row.entityType} • {row.entityId}</div>
+                    </div>
+                    <div className="text-xs text-teal-400">▲ trend</div>
+                  </Link>
+                );
+              } else {
+                const g = groups.find(g => g.id === row.entityId);
+                if (!g) return null;
+                const name = g.primaryMetric || g.name;
+                const href = { pathname: '/ab-test-tracker/[groupId]', query: { groupId: g.id } } as const;
+                return (
+                  <Link key={`${row.entityType}-${row.entityId}-${row.id}`} href={href} className="flex items-center justify-between px-2 py-2 hover:bg-secondary/40">
+                    <div className="min-w-0">
+                      <div className="truncate text-sm font-medium">{name}</div>
+                      <div className="text-xs text-muted-foreground">{row.entityType} • {row.entityId}</div>
+                    </div>
+                    <div className="text-xs text-teal-400">▲ trend</div>
+                  </Link>
+                );
+              }
             })}
           </div>
           <div className="mt-2 flex items-center justify-end">

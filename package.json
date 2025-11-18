@@ -11,7 +11,7 @@
   },
   "dependencies": {
     
-    "sonner": "^1.4.41",
+    
     "@excalidraw/excalidraw": "^0.17.6",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.11",
