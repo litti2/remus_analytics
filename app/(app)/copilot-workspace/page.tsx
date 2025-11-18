@@ -1,4 +1,5 @@
 'use client';
+import { Suspense } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -9,7 +10,7 @@ import { Input } from '@/components/ui/input';
 
 interface Message { id: string; role: 'user'|'assistant'; content: string; timestamp: string; }
 
-export default function CopilotWorkspacePage() {
+function CopilotWorkspacePageInner() {
   type Mode = 'funnel'|'abtest'|'experiment'|'upload';
   const [mode, setMode] = useState<Mode>('funnel');
   const [selectedId, setSelectedId] = useState<string>('');
@@ -121,5 +122,13 @@ export default function CopilotWorkspacePage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function CopilotWorkspacePage() {
+  return (
+    <Suspense fallback={null}>
+      <CopilotWorkspacePageInner />
+    </Suspense>
   );
 }

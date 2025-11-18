@@ -1,11 +1,12 @@
 'use client';
+import { Suspense } from 'react';
 import { useMemo, useState, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useEmaStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 
-export default function ExperimentSuggestionsPage() {
+function ExperimentSuggestionsPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const funnels = useEmaStore((s) => s.funnels);
@@ -112,5 +113,13 @@ export default function ExperimentSuggestionsPage() {
         {filtered.length === 0 && <div className="text-sm text-muted-foreground">No suggestions match your filters.</div>}
       </div>
     </div>
+  );
+}
+
+export default function ExperimentSuggestionsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ExperimentSuggestionsPageInner />
+    </Suspense>
   );
 }

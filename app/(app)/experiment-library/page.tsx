@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -7,7 +8,7 @@ import { useEmaStore } from '@/lib/store';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
-export default function ExperimentLibraryPage() {
+function ExperimentLibraryPageInner() {
   const experiments = useEmaStore((s) => s.experiments);
   const search = useSearchParams();
   const tab = (search.get('tab') || 'library') as 'library'|'suggestions';
@@ -247,5 +248,13 @@ export default function ExperimentLibraryPage() {
         </DialogContent>
       </Dialog>
     </div>
+  );
+}
+
+export default function ExperimentLibraryPage() {
+  return (
+    <Suspense fallback={null}>
+      <ExperimentLibraryPageInner />
+    </Suspense>
   );
 }
