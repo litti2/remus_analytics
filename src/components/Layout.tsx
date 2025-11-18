@@ -20,7 +20,7 @@ const navItems = [
   { path: "/experiment-suggestions", label: "Experiment Suggestions", icon: Lightbulb },
   { path: "/experiment-library", label: "Experiment Library", icon: BookOpen },
   { path: "/notes", label: "Notes", icon: BookOpen },
-  { path: "/about", label: "About Ema", icon: Info }
+  { path: "/about", label: "Remus PRD", icon: Info }
 ];
 
 export const Layout = ({ children }: LayoutProps) => {

@@ -1,0 +1,44 @@
+.flip-container {
+  perspective: 800px; /* applied only to card */
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 300ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.flip-inner[data-state="table"] {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+.radial-funnel-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tooltip container to ensure it stays within the card if added later */
+.steps-card .bounded-tooltip {
+  position: relative;
+}
