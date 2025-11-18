@@ -1,6 +1,6 @@
 export default function Problem() {
   return (
-    <section id="problem" className="border-b border-white/10">
+    <section id="problem" className="border-b border-white/10 bg-[#0a0f1d]">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 py-16 md:grid-cols-2">
         <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
           <h3 className="mb-2 text-2xl font-semibold">Small teams are drowning in analytics tools they don’t need yet.</h3>

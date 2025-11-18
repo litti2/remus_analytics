@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden border-b border-white/10">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60rem_30rem_at_50%_-10%,rgba(99,102,241,0.25),transparent_60%),radial-gradient(50rem_25rem_at_10%_20%,rgba(20,184,166,0.20),transparent_60%),radial-gradient(60rem_30rem_at_90%_10%,rgba(99,102,241,0.15),transparent_60%)] animate-[pulse_12s_ease-in-out_infinite]" />
-      <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 py-16 md:grid-cols-2">
+      <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-20 md:grid-cols-2">
         {/* Left copy */}
         <div className="flex flex-col justify-center">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 backdrop-blur">

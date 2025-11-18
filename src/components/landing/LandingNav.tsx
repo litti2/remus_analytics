@@ -37,7 +37,7 @@ export default function LandingNav() {
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-teal-400 shadow-inner">
             <span className="text-xs font-bold text-white">R</span>
           </div>
-          <span className="text-sm font-semibold text-white/90 group-hover:text-white">Remus</span>
+          <span className="text-sm font-semibold text-white/90 group-hover:text-white">Remus Growth Experimentation Advisor</span>
         </Link>
 
         {/* Center nav (desktop) */}
