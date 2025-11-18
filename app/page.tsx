@@ -113,7 +113,7 @@ export default function LandingPage() {
                 <div className="mb-2 text-xs text-muted-foreground">{card.route}</div>
                 <h3 className="font-medium">{card.title}</h3>
                 <p className="text-sm text-muted-foreground">{card.desc}</p>
-                <div className="mt-3"><Link href={card.route} className="text-sm text-primary underline">Open in app</Link></div>
+                <div className="mt-3"><Link href={card.route as any} className="text-sm text-primary underline">Open in app</Link></div>
               </div>
             ))}
           </div>
