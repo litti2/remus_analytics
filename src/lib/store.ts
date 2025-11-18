@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { AbTestGroup, AbVariant, DataSource, ExperimentLibraryEntry, ExperimentSuggestion, Funnel, FunnelStep, Insight, Note } from './types';
 import * as seed from './mockData';
+import type { AbTestGroup, AbVariant, DataSource, ExperimentLibraryEntry, ExperimentSuggestion, Funnel, FunnelStep, Insight, Note ,Metric} from './types';
+
 
 export type EmaState = {
   funnels: Funnel[];
@@ -54,6 +55,19 @@ export type EmaState = {
   getSuggestionsForFunnel: (funnelId: string) => ExperimentSuggestion[];
   getExperimentsForFunnel: (funnelId: string) => ExperimentLibraryEntry[];
   getInsightsForFunnel: (funnelId: string) => Insight[];
+
+  // 🔥 REQUIRED — these were missing
+  addMetricToFunnel: (funnelId: string, m: Metric) => void;
+  updateFunnelMetric: (funnelId: string, m: Metric) => void;
+  deleteFunnelMetric: (funnelId: string, metricId: string) => void;
+
+  addMetricToGroup: (groupId: string, m: Metric) => void;
+  updateGroupMetric: (groupId: string, m: Metric) => void;
+  deleteGroupMetric: (groupId: string, metricId: string) => void;
+
+  setNorthStars: (
+    list: { id: string; entityType: 'funnel'|'abtest'; entityId: string; order: number }[]
+  ) => void;
 };
 
 export const useEmaStore = create<EmaState>()(
