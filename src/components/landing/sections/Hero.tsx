@@ -39,6 +39,7 @@ export default function Hero() {
               <span key={l} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur"><strong className="text-white">{n}</strong> {l}</span>
             ))}
           </div>
+          </Reveal>
         </div>
         {/* Right mock */}
         <div className="relative">
