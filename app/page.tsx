@@ -1,5 +1,5 @@
-import LandingLayout from '@/components/landing/LandingLayout';
+import LandingFibr from '@/components/LandingFibr';
 
 export default function Page() {
-  return <LandingLayout />;
+  return <LandingFibr />;
 }
