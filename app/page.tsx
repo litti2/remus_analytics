@@ -1,5 +1,5 @@
-import Landing from '@/components/Landing';
+import LandingFibr from '@/components/LandingFibr';
 
 export default function Page() {
-  return <Landing />;
+  return <LandingFibr />;
 }
