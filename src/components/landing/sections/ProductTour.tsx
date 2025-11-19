@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import Reveal from '../Reveal';
 
@@ -20,10 +21,12 @@ export default function ProductTour() {
         <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {cards.map((card, i) => (
             <Reveal key={card.route} delay={i*70}>
-            <Link href={card.route as any} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-sm text-white/90 backdrop-blur transition hover:-translate-y-0.5 hover:border-teal-400/40">
+            <Link href={card.route as any} className="group relative rounded-2xl bg-white/[0.02] p-[1px] transition hover:scale-[1.01]">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-5 text-sm text-white/90 backdrop-blur transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:border-teal-400/40">
               <div className="font-medium">{card.title}</div>
               <div className="mt-1 text-white/70">{card.desc}</div>
               <div className="mt-3 text-teal-300">Open in app →</div>
+              </div>
             </Link>
           </Reveal>
           ))}

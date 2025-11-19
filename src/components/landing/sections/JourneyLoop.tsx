@@ -1,3 +1,6 @@
+'use client';
+import Reveal from '../Reveal';
+
 export default function JourneyLoop() {
   const nodes = [
     { t: 'Pick your metrics', b: 'Select impressions, clicks, trials, activation, revenue — or any custom metric.' },
@@ -12,7 +15,7 @@ export default function JourneyLoop() {
         <h2 className="mb-6 text-center text-2xl font-semibold">How Remus fits into your growth loop</h2>
         <div className="relative mx-auto grid max-w-4xl place-items-center">
           {/* Center circle */}
-          <div className="relative z-10 flex h-28 w-28 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-center text-sm text-white/80">
+          <div className="relative z-10 flex h-28 w-28 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-center text-sm text-white/80 animate-[pulse_6s_ease-in-out_infinite]">
             Continuous\n            <br/>Growth Loop
           </div>
           {/* Ring of nodes */}
@@ -31,11 +34,13 @@ export default function JourneyLoop() {
                 const x = Math.cos(angle) * r;
                 const y = Math.sin(angle) * r;
                 return (
-                  <div key={n.t} className="absolute" style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)` , transform: 'translate(-50%, -50%)' }}>
-                    <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3 text-center text-xs text-white/80 transition hover:-translate-y-0.5 hover:border-teal-400/40">
-                      <div className="font-medium text-white/90">{n.t}</div>
-                      <div className="mt-1 max-w-[180px] text-[11px] leading-relaxed">{n.b}</div>
-                    </div>
+                  <div key={n.t} className="absolute" style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)`, transform: 'translate(-50%, -50%)' }}>
+                    <Reveal delay={idx*80}>
+                      <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3 text-center text-xs text-white/80 transition hover:-translate-y-0.5 hover:scale-[1.02] hover:border-teal-400/40">
+                        <div className="font-medium text-white/90">{n.t}</div>
+                        <div className="mt-1 max-w-[180px] text-[11px] leading-relaxed">{n.b}</div>
+                      </div>
+                    </Reveal>
                   </div>
                 );
               })}
