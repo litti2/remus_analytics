@@ -9,7 +9,7 @@ import Personas from './sections/Personas';
 import DataFlex from './sections/DataFlex';
 import FAQ from './sections/FAQ';
 import FinalCTA from './sections/FinalCTA';
-import JourneyLoop from './sections/JourneyLoop';
+import GrowthLoop from './sections/GrowthLoop';
 
 export default function LandingLayout() {
   return (
@@ -18,7 +18,7 @@ export default function LandingLayout() {
       <Hero />
       <Problem />
       <HowItWorks />
-      <JourneyLoop />
+      <GrowthLoop />
       <ProductTour />
       <MetricTicker />
       <Insights />
