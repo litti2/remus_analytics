@@ -1,126 +1,94 @@
 'use client';
-import { useState } from 'react';
-import { motion, useMotionValue, useTransform, useAnimationFrame } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Reveal from '../Reveal';
-import { TrendingUp, Beaker, Filter, Repeat, SlidersHorizontal } from 'lucide-react';
+import { SlidersHorizontal, Filter, TrendingUp, Beaker, Repeat } from 'lucide-react';
 
-const NODES = [
-  { key: 'metrics', title: 'Pick your metrics', body: 'Select impressions, clicks, trials, activation, revenue — or any custom metric.', icon: SlidersHorizontal, angle: 0 },
-  { key: 'funnels', title: 'Define funnels & tests', body: 'Group metrics into funnels and A/B test groups that mirror your journey.', icon: Filter, angle: 72 },
-  { key: 'analyze', title: 'Analyze & prioritize', body: 'See biggest dropoffs, outliers, and high-leverage opportunities.', icon: TrendingUp, angle: 144 },
-  { key: 'track', title: 'Track the experiments', body: 'Turn ideas into experiments, track outcomes, and capture learnings.', icon: Beaker, angle: 216 },
-  { key: 'refine', title: 'Refine & repeat', body: 'Adjust which metrics matter as the loop gets smarter.', icon: Repeat, angle: 288 },
+const DURATION = 50; // seconds for a full revolution
+const RING_SIZE = 600; // px (diameter of rotating ring)
+const RADIUS = RING_SIZE / 2; // 300px
+
+const STEPS = [
+  { angle: 0,   title: 'Pick your metrics',       body: 'Select impressions, clicks, trials, activation, revenue — or any custom metric.', icon: SlidersHorizontal },
+  { angle: 72,  title: 'Define funnels & tests',  body: 'Group metrics into funnels and A/B test groups that mirror your journey.',        icon: Filter },
+  { angle: 144, title: 'Analyze & prioritize',    body: 'See biggest dropoffs, outliers, and high-leverage opportunities.',                icon: TrendingUp },
+  { angle: 216, title: 'Track the experiments',   body: 'Turn ideas into experiments, track outcomes, and capture learnings.',             icon: Beaker },
+  { angle: 288, title: 'Refine & repeat',         body: 'Adjust which metrics matter as the loop gets smarter.',                           icon: Repeat },
 ] as const;
 
 export default function GrowthLoop() {
-  const [paused, setPaused] = useState(false);
-  const rotation = useMotionValue(0);
-
-  useAnimationFrame((t, delta) => {
-    if (paused) return;
-    // 360 degrees per 40_000ms => delta ms step
-    const step = (360 / 40000) * delta;
-    rotation.set((rotation.get() + step) % 360);
-  });
-
   return (
-    <section id="journey" className="relative bg-[#0B0E17]">
-      <div className="mx-auto flex max-w-6xl flex-col gap-32 px-6 py-24">
-        <div className="relative isolate min-h-[800px] overflow-visible rounded-3xl border border-white/10 bg-white/[0.02] p-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
-          {/* Ambient radial gradient */}
-          <div className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-[radial-gradient(60rem_30rem_at_50%_0%,rgba(99,102,241,0.16),transparent_60%),radial-gradient(40rem_24rem_at_60%_50%,rgba(20,184,166,0.12),transparent_60%)]" />
+    <section className="relative flex flex-col items-center justify-center py-24 overflow-hidden bg-[#0B0E17]">
+      {/* Title lives outside the rotating mechanism to avoid overlap */}
+      <div className="relative z-10 mb-10 px-6 text-center">
+        <Reveal>
+          <h2 className="text-2xl font-semibold text-white">How Remus fits into your growth loop</h2>
+        </Reveal>
+        <Reveal delay={80}>
+          <p className="mt-2 max-w-2xl text-white/70">
+            A continuous loop that starts from your own metrics — not someone else’s dashboard.
+          </p>
+        </Reveal>
+      </div>
 
-          <Reveal>
-            <h2 className="mb-2 text-center text-2xl font-semibold text-white">How Remus fits into your growth loop</h2>
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="mx-auto mb-8 max-w-2xl text-center text-white/70">A continuous loop that starts from your own metrics — not someone else’s dashboard.</p>
-          </Reveal>
-
-          {/* Orbit stage */}
-          <div className="relative mx-auto mt-4 h-[620px] w-[620px] max-w-full md:h-[620px] md:w-[620px]">
-            {/* Center hub */}
-            <div className="absolute inset-0 grid place-items-center">
-              <Reveal>
-                <div className="relative flex h-40 w-40 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-center shadow-inner backdrop-blur">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: [1, 1.04, 1] }}
-                    transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 3, ease: 'easeInOut' }}
-                    className="text-sm font-medium leading-snug text-white/90"
-                  >
-                    <div>Continuous</div>
-                    <div>Growth Loop</div>
-                  </motion.div>
-                  <span className="pointer-events-none absolute -inset-6 -z-10 rounded-full bg-indigo-400/10 blur-2xl" />
-                </div>
-              </Reveal>
+      {/* Orbit stage container (prevents layout collision) */}
+      <div className="relative w-[800px] max-w-[95vw] h-[800px] flex items-center justify-center">
+        {/* Static center (independent of the rotating ring) */}
+        <div className="pointer-events-none absolute inset-0 grid place-items-center">
+          <div className="relative z-20 flex h-44 w-44 items-center justify-center rounded-full border border-white/10 bg-gradient-to-b from-[#111827] to-[#0B0E17] text-center shadow-[inset_0_0_30px_rgba(99,102,241,0.15)]">
+            <div className="text-sm font-medium leading-snug text-white/90">
+              <div>Continuous</div>
+              <div>Growth Loop</div>
             </div>
-
-            {/* Orbit ring visual */}
-            <Reveal delay={120}>
-              <div className="absolute inset-0 grid place-items-center">
-                <div className="h-[520px] w-[520px] rounded-full border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset]" />
-              </div>
-            </Reveal>
-
-            {/* Connectors (rotate with ring) */}
-            <motion.svg className="absolute left-1/2 top-1/2 -z-0 -translate-x-1/2 -translate-y-1/2" width={620} height={620} style={{ rotate: rotation }}>
-              {NODES.map((n, i) => {
-                const r = 260; // radius to node center
-                const ang = (Math.PI / 180) * n.angle;
-                const cx = 310 + r * Math.cos(ang);
-                const cy = 310 + r * Math.sin(ang);
-                return (
-                  <line key={`ln-${n.key}`} x1={310} y1={310} x2={cx} y2={cy} stroke="rgba(148,163,184,0.25)" strokeWidth={1} />
-                );
-              })}
-            </motion.svg>
-
-            {/* Rotating ring holding nodes */}
-            <motion.div className="absolute inset-0" style={{ rotate: rotation }}>
-              {NODES.map((n) => {
-                const Icon = n.icon;
-                return (
-                  <div key={n.key} className="absolute left-1/2 top-1/2" style={{ transformOrigin: '0 0', transform: `rotate(${n.angle}deg) translate(260px)` }}>
-                    {/* Counter-rotate the card to keep text upright */}
-                    <NodeCard
-                      title={n.title}
-                      body={n.body}
-                      icon={<Icon className="h-4 w-4 text-teal-300" />}
-                      counterRotate={useTransform(rotation, (v) => -v - n.angle)}
-                      onHover={(p) => setPaused(p)}
-                    />
-                  </div>
-                );
-              })}
-            </motion.div>
+            <span className="pointer-events-none absolute -inset-6 rounded-full bg-indigo-500/10 blur-2xl" />
           </div>
         </div>
 
-        {/* Separator space to avoid collision with Product Tour */}
-        <div className="h-0" />
-      </div>
-    </section>
-  );
-}
+        {/* Rotating ring (handles revolution of nodes + connectors) */}
+        <motion.div
+          className="relative z-0 flex items-center justify-center"
+          style={{ width: RING_SIZE, height: RING_SIZE }}
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, ease: 'linear', duration: DURATION }}
+        >
+          {/* Visible orbit ring */}
+          <div className="absolute inset-0 rounded-full border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset]" />
 
-function NodeCard({ title, body, icon, counterRotate, onHover }: { title: string; body: string; icon: React.ReactNode; counterRotate: any; onHover: (paused: boolean) => void }) {
-  return (
-    <motion.div
-      onHoverStart={() => onHover(true)}
-      onHoverEnd={() => onHover(false)}
-      style={{ rotate: counterRotate }}
-      className="group relative w-[200px] max-w-[42vw] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/5 p-3 text-xs text-white/85 shadow-md backdrop-blur-md transition md:w-[220px]"
-      whileHover={{ scale: 1.07 }}
-      transition={{ type: 'spring', stiffness: 220, damping: 20 }}
-    >
-      <div className="mb-1 inline-flex items-center gap-2 text-[11px] text-white/80">
-        {icon}
-        <span className="font-medium text-white">{title}</span>
+          {/* Connectors (rotate with ring so no extra math) */}
+          <svg className="absolute inset-0" width={RING_SIZE} height={RING_SIZE} viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`}> 
+            {STEPS.map((s, idx) => {
+              const ang = (Math.PI / 180) * s.angle;
+              const cx = RADIUS + RADIUS * Math.cos(ang);
+              const cy = RADIUS + RADIUS * Math.sin(ang);
+              return <line key={`ln-${idx}`} x1={RADIUS} y1={RADIUS} x2={cx} y2={cy} stroke="rgba(148,163,184,0.28)" strokeWidth={1} />;
+            })}
+          </svg>
+
+          {/* Satellites on ring edge; each card counter-rotates to stay upright */}
+          {STEPS.map((s, idx) => (
+            <div
+              key={idx}
+              className="absolute left-1/2 top-1/2"
+              style={{ transform: `rotate(${s.angle}deg) translate(${RADIUS}px)`, transformOrigin: '0 0' }}
+            >
+              <motion.div
+                className="w-64 max-w-[70vw] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/5 p-4 text-left text-white/90 shadow-md backdrop-blur-md"
+                animate={{ rotate: -360 }}
+                transition={{ repeat: Infinity, ease: 'linear', duration: DURATION }}
+                whileHover={{ scale: 1.06 }}
+              >
+                <div className="mb-1 inline-flex items-center gap-2 text-sm font-medium">
+                  {s.icon && <s.icon className="h-4 w-4 text-teal-300" />}
+                  <span>{s.title}</span>
+                </div>
+                <p className="text-xs leading-relaxed text-white/80">{s.body}</p>
+              </motion.div>
+            </div>
+          ))}
+        </motion.div>
       </div>
-      <div className="leading-relaxed text-white/80">{body}</div>
-      <div className="pointer-events-none absolute -inset-3 -z-10 hidden rounded-3xl bg-teal-400/10 blur-md transition group-hover:block" />
-    </motion.div>
+
+      {/* Bottom margin to guarantee separation from Product Tour */}
+      <div className="mt-[100px]" />
+    </section>
   );
 }
